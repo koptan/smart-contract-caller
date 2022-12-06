@@ -10,7 +10,7 @@ async function main () {
 
   // 0 -> success
   // 1 -> faild
-  let result = process.arges[2];
+  let result = args[2];
 
   let status = ''; 
         
