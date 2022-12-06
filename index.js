@@ -6,9 +6,14 @@ async function main () {
     
   let url = args[0];
   let activity_id = args[1];
-  // let result = process.arges[2];
 
-    
+
+  // 0 -> success
+  // 1 -> faild
+  let result = process.arges[2];
+
+  let status = ''; 
+        
   // Initialise the provider to connect to the local node
   const provider = new WsProvider(url);
 
@@ -26,14 +31,20 @@ async function main () {
   ]);
 
   console.log(`You are connected to chain ${chain} using ${nodeName} v${nodeVersion}`);
- 
+
+  if(result == "0"){
+      status = "Done";
+  }else{
+      status = "InProgress";
+  }
+
   // Create alice (carry-over from the keyring section)
   const alice = keyring.addFromUri('//Alice');
 
-  const unsub = await api.tx.templateModule.updateActivityStatus(activity_id,"Done")
+  await api.tx.templateModule.updateActivityStatus(activity_id,status)
    .signAndSend(alice,(result) => {
-        console.log(`Current status is ${result.status}`)
-        unsub();
+       console.log(`Current status is ${result.status}`);
+       process.exit(0);
    });
 }
 
