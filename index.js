@@ -33,9 +33,9 @@ async function main () {
   console.log(`You are connected to chain ${chain} using ${nodeName} v${nodeVersion}`);
 
   if(result == "0"){
-      status = "Done";
+      status = "Passed";
   }else{
-      status = "InProgress";
+      status = "NotPassed";
   }
 
   // Create alice (carry-over from the keyring section)
